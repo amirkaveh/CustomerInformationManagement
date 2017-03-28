@@ -5,23 +5,4 @@
          version="3.1">
 
 
-    <servlet>
-        <servlet-name>home</servlet-name>
-        <servlet-class>controller.Home</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>naturalCustomerManagement</servlet-name>
-        <servlet-class>controller.NaturalCustomerManagement</servlet-class>
-    </servlet>
-
-
-    <servlet-mapping>
-        <servlet-name>home</servlet-name>
-        <url-pattern> </url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>naturalCustomerManagement</servlet-name>
-        <url-pattern>/naturalCustomerManagement</url-pattern>
-    </servlet-mapping>
-
 </web-app>

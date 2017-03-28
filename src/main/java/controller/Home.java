@@ -1,6 +1,7 @@
 package controller;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +11,7 @@ import java.io.PrintWriter;
 /**
  * Created by $Hamid on 3/13/2017.
  */
+@WebServlet("")
 public class Home extends HttpServlet {
 
 
@@ -22,9 +24,9 @@ public class Home extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        request.getRequestDispatcher("home-header-part1.html").include(request,response);
+        request.getRequestDispatcher("header-part1.html").include(request,response);
         out.println("Customer Information Management");//page title
-        request.getRequestDispatcher("home-header-part2.html").include(request,response);
+        request.getRequestDispatcher("header-part2.html").include(request,response);
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request,response);
         request.getRequestDispatcher("home.html").include(request,response);

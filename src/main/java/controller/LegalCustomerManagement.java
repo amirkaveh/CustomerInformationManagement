@@ -11,8 +11,9 @@ import java.io.PrintWriter;
 /**
  * Created by $Hamid on 3/13/2017.
  */
-@WebServlet("/naturalCustomerManagement")
-public class NaturalCustomerManagement extends HttpServlet {
+
+@WebServlet("/legalCustomerManagement")
+public class LegalCustomerManagement extends HttpServlet {
 
 
     @Override
@@ -25,11 +26,11 @@ public class NaturalCustomerManagement extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         request.getRequestDispatcher("header-part1.html").include(request,response);
-        out.println("Natural Customer Management");//page title
+        out.println("Legal Customer Management");//page title
         request.getRequestDispatcher("header-part2.html").include(request,response);
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request,response);
-        request.getRequestDispatcher("natural.html").include(request,response);
+        request.getRequestDispatcher("legal.html").include(request,response);
         request.getRequestDispatcher("footer.html").include(request,response);
         out.println("</body>");
         out.close();

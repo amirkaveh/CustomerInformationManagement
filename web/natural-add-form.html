@@ -1,0 +1,55 @@
+<!--<div class="container margin-top-100" align="center">-->
+<!--<h2>Add New Natural Customer</h2>-->
+<!--<p class="margin-top-30 font-size-medium"> Choose the customer type you want to work with.</p>-->
+<!--<div class="list-group col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 margin-top-10">-->
+<!--<a class="list-group-item list-group-item-success" href="naturalCustomerManagement"><h4>Natural Persons</h4></a>-->
+<!--<a class="list-group-item list-group-item-info" href="legalCustomerManagement"><h4>Legal Persons</h4></a>-->
+<!--</div>-->
+<!--</div>-->
+
+<div class="container">
+    <div class="margin-top-30 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1" align="left">
+        <h2>Add new natural person customer</h2>
+        <p class="font-size-medium"> Fill in the form information of new customer</p>
+        <!--TODO: fill action-->
+        <form class="form-horizontal" action="addNewNaturalCustomer" method="POST">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="name">Name:</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="family">Family:</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" name="family" id="family" placeholder="Enter family">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="father">Father name:</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" name="father" id="father" placeholder="Enter father name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="birth">Birth date:</label>
+                <div class="col-sm-7">
+                    <input type="date" class="form-control" name="birth" id="birth" placeholder="Enter birth date">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="nationalID">National ID:</label>
+                <div class="col-sm-7">
+                    <input type="number" class="form-control" name="nationalID" id="nationalID" placeholder="Enter national ID">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-5">
+                    <button type="submit" class="btn btn-success">Add Customer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
