@@ -1,5 +1,7 @@
 package controller;
 
+import dao.CustomerDAO;
+import model.Customer;
 import model.NaturalPersonCustomer;
 
 import javax.servlet.ServletContext;
@@ -10,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -32,6 +33,8 @@ public class NaturalCustomerAddNew extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //context.log("post method");
 
+//        TODO: may make code more modular and maintainable!
+
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         request.getRequestDispatcher("header-part1.html").include(request, response);
@@ -45,7 +48,12 @@ public class NaturalCustomerAddNew extends HttpServlet {
 
         if(requestValidate(request,naturalPerson)){
             //context.log("true occurred");
-            //TODO: some DataBase work for adding new customer
+            Customer customer = new Customer();
+            customer.setType(Customer.CustomerType.naturalPerson);
+            CustomerDAO.insert(customer);
+
+            //TODO: getting customer id back from database and save other customer information
+
             request.getRequestDispatcher("add-alert-success.html").include(request,response);
         }
         else {

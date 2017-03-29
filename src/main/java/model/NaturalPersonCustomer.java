@@ -6,13 +6,13 @@ import java.util.Date;
  * Created by $Hamid on 3/12/2017.
  */
 public class NaturalPersonCustomer extends Customer{
-//TODO: need to implement.
     private String name;
     private String family;
     private String fatherName;
     private Date birthDate;
     private Long nationalID;
 
+//    TODO: may use constructor instead of these bunch of setter method
 
     public String getName() {
         return name;
