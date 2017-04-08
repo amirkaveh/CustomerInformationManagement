@@ -1,9 +1,9 @@
 package controller;
 
 import dao.CustomerDAO;
-import dao.NaturalCustomerDAO;
+import dao.LegalCustomerDAO;
 import model.Customer;
-import model.NaturalPersonCustomer;
+import model.LegalPersonCustomer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,8 +19,8 @@ import java.util.Date;
 /**
  * Created by $Hamid on 3/13/2017.
  */
-@WebServlet("/addNewNaturalCustomer")
-public class NaturalCustomerAddNew extends HttpServlet {
+@WebServlet("/addNewLegalCustomer")
+public class LegalCustomerAddNew extends HttpServlet {
 
     private ServletContext context;
 
@@ -38,36 +38,35 @@ public class NaturalCustomerAddNew extends HttpServlet {
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        request.setAttribute("pageTitle","Add Natural Customer");
+        request.setAttribute("pageTitle", "Add Legal Customer");
         request.getRequestDispatcher("header.jsp").include(request, response);
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request, response);
-        request.getRequestDispatcher("natural-add-form.html").include(request, response);
+        request.getRequestDispatcher("legal-add-form.html").include(request, response);
 
-        NaturalPersonCustomer naturalPerson = new NaturalPersonCustomer();
+        LegalPersonCustomer legalPerson = new LegalPersonCustomer();
 
-        if(!getParametersAndValidate(request,naturalPerson)){
+        if (!getParametersAndValidate(request, legalPerson)) {
             //context.log("false occurred");
-            request.setAttribute("errorTitle","Input Error:");
-            request.setAttribute("info","There is some error in input data. Enter all required data correctly.");
-            request.getRequestDispatcher("alert-error.jsp").include(request,response);
-        }
-        else {
+            request.setAttribute("errorTitle", "Input Error:");
+            request.setAttribute("info", "There is some error in input data. Enter all required data correctly.");
+            request.getRequestDispatcher("alert-error.jsp").include(request, response);
+        } else {
             Customer customer = new Customer();
-            customer.setType(Customer.CustomerType.naturalPerson);
-            if(!CustomerDAO.insert(customer)){
+            customer.setType(Customer.CustomerType.legalPerson);
+            if (!CustomerDAO.insert(customer)) {
                 request.setAttribute("errorTitle", "Database Error:");
                 request.setAttribute("info", "there is some database error, can't insert new customer to \"customers\" table.");
                 request.getRequestDispatcher("alert-error.jsp").include(request, response);
-            }else {
-                naturalPerson.setCustomerID(customer.getCustomerID());
-                if (NaturalCustomerDAO.insert(naturalPerson)) {
+            } else {
+                legalPerson.setCustomerID(customer.getCustomerID());
+                if (LegalCustomerDAO.insert(legalPerson)) {
                     request.setAttribute("customerID", customer.getCustomerID());
                     request.getRequestDispatcher("alert-success.jsp").include(request, response);
                 } else {
                     CustomerDAO.delete(customer);
                     request.setAttribute("errorTitle", "Database Error:");
-                    request.setAttribute("info", "there is a national ID duplicate or other database error.");
+                    request.setAttribute("info", "there is an economical ID duplicate or other database error.");
                     request.getRequestDispatcher("alert-error.jsp").include(request, response);
                 }
             }
@@ -84,46 +83,43 @@ public class NaturalCustomerAddNew extends HttpServlet {
 //        //context.log("get method");
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        request.setAttribute("pageTitle","Add Natural Customer");
+        request.setAttribute("pageTitle", "Add Natural Customer");
         request.getRequestDispatcher("header.jsp").include(request, response);
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request, response);
-        request.getRequestDispatcher("natural-add-form.html").include(request, response);
+        request.getRequestDispatcher("legal-add-form.html").include(request, response);
         request.getRequestDispatcher("footer.html").include(request, response);
         out.println("</body>");
         out.close();
     }
 
-    private Boolean getParametersAndValidate(HttpServletRequest request, NaturalPersonCustomer naturalPerson) {
+    private Boolean getParametersAndValidate(HttpServletRequest request, LegalPersonCustomer legalPerson) {
         //context.log("validation");
         String name = request.getParameter("name");
-        String family = request.getParameter("family");
-        String fatherName = request.getParameter("father");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String birthDateString = request.getParameter("birth");
-        Date birthDate=null;
+        String registrationDateString = request.getParameter("registration");
+        Date registraionDate = null;
         try {
-            birthDate = dateFormat.parse(birthDateString);
+            registraionDate = dateFormat.parse(registrationDateString);
         } catch (Exception e) {
 //            e.printStackTrace();
             return false;
         }
-        String nationalIDString = request.getParameter("nationalID");
-        Long nationalID=null;
+        String economicalIDString = request.getParameter("economicalID");
+        Long economicalID = null;
         try {
-            nationalID = Long.parseLong(nationalIDString);
+            economicalID = Long.parseLong(economicalIDString);
         } catch (Exception e) {
 //            e.printStackTrace();
             return false;
         }
-        if( name==null || name.equals("") || family==null || family.equals("") || fatherName==null || fatherName.equals("")
-                || birthDate==null || nationalID==null )
+        if (name == null || name.equals("") || registraionDate == null || economicalID == null)
             return false;
-        naturalPerson.setName(name);
-        naturalPerson.setFamily(family);
-        naturalPerson.setFatherName(fatherName);
-        naturalPerson.setBirthDate(birthDate);
-        naturalPerson.setNationalID(nationalID);
+
+        legalPerson.setName(name);
+        legalPerson.setRegistrationDate(registraionDate);
+        legalPerson.setEconomicalID(economicalID);
+
         return true;
     }
 }

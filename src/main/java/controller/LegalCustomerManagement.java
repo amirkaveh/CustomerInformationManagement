@@ -25,9 +25,8 @@ public class LegalCustomerManagement extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        request.getRequestDispatcher("header-part1.html").include(request,response);
-        out.println("Legal Customer Management");//page title
-        request.getRequestDispatcher("header-part2.html").include(request,response);
+        request.setAttribute("pageTitle","Legal Customer Management");
+        request.getRequestDispatcher("header.jsp").include(request,response);
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request,response);
         request.getRequestDispatcher("legal.html").include(request,response);

@@ -2,7 +2,8 @@
     <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
         <div class="col-sm-9 alert alert-danger alert-dismissable fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Input Error:</strong> There is some error in input data. Enter all required data correctly.
+            <strong><%=request.getAttribute("errorTitle")%></strong>
+            <%=request.getAttribute("info")%>
         </div>
     </div>
 </div>

@@ -24,9 +24,8 @@ public class Home extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        request.getRequestDispatcher("header-part1.html").include(request,response);
-        out.println("Customer Information Management");//page title
-        request.getRequestDispatcher("header-part2.html").include(request,response);
+        request.setAttribute("pageTitle","Customer Information Management");
+        request.getRequestDispatcher("header.jsp").include(request,response);
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request,response);
         request.getRequestDispatcher("home.html").include(request,response);
