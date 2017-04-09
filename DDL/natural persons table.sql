@@ -5,7 +5,7 @@ person_name varchar(30),
 person_family varchar(50),
 father_name varchar(30),
 birth_date date,
-national_id bigint(10),
+national_id bigint(10) unique,
 primary key(customer_id),
 foreign key(customer_id) references customers(customer_id)
 );

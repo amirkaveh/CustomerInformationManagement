@@ -14,6 +14,18 @@ public class NaturalPersonCustomer extends Customer{
 
 //    TODO: may use constructor instead of these bunch of setter method
 
+    public NaturalPersonCustomer() {
+    }
+
+    public NaturalPersonCustomer(Integer customerID, String name, String family, String fatherName, Date birthDate, Long nationalID) {
+        this.name = name;
+        this.family = family;
+        this.fatherName = fatherName;
+        this.birthDate = birthDate;
+        this.nationalID = nationalID;
+        this.setCustomerID(customerID);
+    }
+
     public String getName() {
         return name;
     }

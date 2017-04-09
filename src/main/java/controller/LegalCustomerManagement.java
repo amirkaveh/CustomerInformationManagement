@@ -23,7 +23,6 @@ public class LegalCustomerManagement extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         request.setAttribute("pageTitle","Legal Customer Management");
         request.getRequestDispatcher("header.jsp").include(request,response);

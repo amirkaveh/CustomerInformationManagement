@@ -36,7 +36,6 @@ public class LegalCustomerAddNew extends HttpServlet {
 
 //        TODO: may make code more modular and maintainable!
 
-        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         request.setAttribute("pageTitle", "Add Legal Customer");
         request.getRequestDispatcher("header.jsp").include(request, response);
@@ -81,7 +80,6 @@ public class LegalCustomerAddNew extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        //context.log("get method");
-        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         request.setAttribute("pageTitle", "Add Natural Customer");
         request.getRequestDispatcher("header.jsp").include(request, response);

@@ -1,7 +1,7 @@
 package controller;
 
 import dao.CustomerDAO;
-import dao.NaturalCustomerDAO;
+import dao.NaturalPersonDAO;
 import model.Customer;
 import model.NaturalPersonCustomer;
 
@@ -20,7 +20,7 @@ import java.util.Date;
  * Created by $Hamid on 3/13/2017.
  */
 @WebServlet("/addNewNaturalCustomer")
-public class NaturalCustomerAddNew extends HttpServlet {
+public class NaturalPersonAddNew extends HttpServlet {
 
     private ServletContext context;
 
@@ -36,7 +36,6 @@ public class NaturalCustomerAddNew extends HttpServlet {
 
 //        TODO: may make code more modular and maintainable!
 
-        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         request.setAttribute("pageTitle","Add Natural Customer");
         request.getRequestDispatcher("header.jsp").include(request, response);
@@ -61,7 +60,7 @@ public class NaturalCustomerAddNew extends HttpServlet {
                 request.getRequestDispatcher("alert-error.jsp").include(request, response);
             }else {
                 naturalPerson.setCustomerID(customer.getCustomerID());
-                if (NaturalCustomerDAO.insert(naturalPerson)) {
+                if (NaturalPersonDAO.insert(naturalPerson)) {
                     request.setAttribute("customerID", customer.getCustomerID());
                     request.getRequestDispatcher("alert-success.jsp").include(request, response);
                 } else {
@@ -82,7 +81,6 @@ public class NaturalCustomerAddNew extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        //context.log("get method");
-        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         request.setAttribute("pageTitle","Add Natural Customer");
         request.getRequestDispatcher("header.jsp").include(request, response);
