@@ -92,7 +92,7 @@ public class NaturalPersonAddNew extends HttpServlet {
         out.close();
     }
 
-    private Boolean getParametersAndValidate(HttpServletRequest request, NaturalPersonCustomer naturalPerson) {
+    public static Boolean getParametersAndValidate(HttpServletRequest request, NaturalPersonCustomer naturalPerson) {
         //context.log("validation");
         String name = request.getParameter("name");
         String family = request.getParameter("family");

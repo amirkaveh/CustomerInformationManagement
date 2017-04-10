@@ -53,6 +53,44 @@ public class NaturalPersonDAO {
         }
     }
 
+    public static Boolean edit(NaturalPersonCustomer naturalPerson){
+        Connection connection = Database.getConnection();
+        String queryString = "";
+        Boolean first = true;
+        if (naturalPerson.getName() != null) {
+            queryString += ((first) ? " " : ", ") + "person_name = '" + naturalPerson.getName() + "'";
+            first = false;
+        }
+        if (naturalPerson.getFamily() != null) {
+            queryString += ((first) ? " " : ", ") + "person_family = '" + naturalPerson.getFamily() + "'";
+            first = false;
+        }
+        if (naturalPerson.getFatherName() != null) {
+            queryString += ((first) ? " " : ", ") + "father_name = '" + naturalPerson.getFatherName() + "'";
+            first = false;
+        }
+        if (naturalPerson.getBirthDate() != null) {
+            queryString += ((first) ? ", " : ", ") + "birth_date = '" + new java.sql.Date(naturalPerson.getBirthDate().getTime()) + "'";
+            first = false;
+        }
+        if (naturalPerson.getNationalID() != null) {
+            queryString += ((first) ? " " : ", ") + "national_id = '" + naturalPerson.getNationalID() + "'";
+//            first = false;
+        }
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE natural_persons SET" + queryString + " WHERE customer_id = ?");
+            statement.setInt(1, naturalPerson.getCustomerID());
+            statement.executeUpdate();
+            connection.close();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static List<NaturalPersonCustomer> search(NaturalPersonCustomer naturalPerson) {
         Connection connection = Database.getConnection();
 
