@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 /**
  * Created by $Hamid on 3/13/2017.
  */
-@WebServlet("/editNaturalCustomer")
+@WebServlet("/editNaturalPerson")
 public class NaturalPersonEdit extends HttpServlet {
 
     private ServletContext context;

@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 /**
  * Created by $Hamid on 3/13/2017.
  */
-@WebServlet("/naturalCustomerManagement")
+@WebServlet("/naturalPersonManagement")
 public class NaturalPersonManagement extends HttpServlet {
 
 

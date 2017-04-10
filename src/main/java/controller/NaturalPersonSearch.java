@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by $Hamid on 3/13/2017.
  */
-@WebServlet("/searchNaturalCustomer")
+@WebServlet("/searchNaturalPerson")
 public class NaturalPersonSearch extends HttpServlet {
 
 //    private ServletContext context;

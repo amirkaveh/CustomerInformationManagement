@@ -3,7 +3,7 @@
     <div class="margin-top-30" align="left">
         <h2> Edit legal person customer</h2>
         <p class="font-size-medium"> Edit any part of the information you want to change, left others as they are:</p>
-        <form class="form-horizontal" action="editLegalCustomer" method="POST">
+        <form class="form-horizontal" action="editLegalPerson" method="POST">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="customerID">Customer ID:</label>
                 <div class="col-sm-3">

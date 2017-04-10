@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 /**
  * Created by $Hamid on 3/13/2017.
  */
-@WebServlet("/deleteLegalCustomer")
+@WebServlet("/deleteLegalPerson")
 public class LegalPersonDelete extends HttpServlet {
 
 //    private ServletContext context;
@@ -46,14 +46,8 @@ public class LegalPersonDelete extends HttpServlet {
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request,response);
 
-        String customerIDString = request.getParameter("customerID");
-        Integer customerID = null;
-        try {
-            customerID = Integer.parseInt(customerIDString);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+        Integer customerID = RequestParser.getInteger(request,"customerID");//may produce exception. it's ok
+
         LegalPersonCustomer legalPerson = new LegalPersonCustomer();
         legalPerson.setCustomerID(customerID);
         if(LegalPersonDAO.delete(legalPerson))
@@ -73,15 +67,8 @@ public class LegalPersonDelete extends HttpServlet {
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request,response);
 
+        Integer customerID = RequestParser.getInteger(request,"customerID");//may produce exception. it's ok.
 
-        String customerIDString = request.getParameter("customerID");
-        Integer customerID = null;
-        try {
-            customerID = Integer.parseInt(customerIDString);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
         LegalPersonCustomer searchPerson = new LegalPersonCustomer();
         searchPerson.setCustomerID(customerID);
         LegalPersonCustomer legalPerson = LegalPersonDAO.search(searchPerson).get(0);

@@ -3,7 +3,7 @@
     <div class="margin-top-30" align="left">
         <h2> Delete legal person customer</h2>
         <p class="font-size-medium"> Do you really want to delete this customer?</p>
-        <form class="form-horizontal" action="deleteLegalCustomer" method="POST">
+        <form class="form-horizontal" action="deleteLegalPerson" method="POST">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="customerID">Customer ID:</label>
                 <div class="col-sm-7">

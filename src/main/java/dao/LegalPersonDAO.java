@@ -12,15 +12,15 @@ import java.util.List;
  * Created by $Hamid on 4/8/2017.
  */
 public class LegalPersonDAO {
-    public static boolean insert(LegalPersonCustomer legalPerson){
+    public static boolean insert(LegalPersonCustomer legalPerson) {
         Connection connection = Database.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("insert into legal_persons(customer_id,company_name,registration_date,economical_id) VALUES (?,?,?,?)");
-            statement.setInt(1,legalPerson.getCustomerID());
-            statement.setString(2,legalPerson.getName());
+            statement.setInt(1, legalPerson.getCustomerID());
+            statement.setString(2, legalPerson.getName());
             //Warning: this date conversion may be incorrect. It works fine for now.
-            statement.setDate(3,new java.sql.Date(legalPerson.getRegistrationDate().getTime()));
-            statement.setLong(4,legalPerson.getEconomicalID());
+            statement.setDate(3, new java.sql.Date(legalPerson.getRegistrationDate().getTime()));
+            statement.setLong(4, legalPerson.getEconomicalID());
             statement.executeUpdate();
 
             connection.close();
@@ -60,6 +60,7 @@ public class LegalPersonDAO {
         }
 
     }
+
     private static List<LegalPersonCustomer> makeLegalPersonList(ResultSet resultSet) {
         List<LegalPersonCustomer> legalPersons = new ArrayList<>();
         try {
@@ -68,7 +69,7 @@ public class LegalPersonDAO {
                 String name = resultSet.getString("company_name");
                 java.util.Date registrationDate = resultSet.getDate("registration_date");
                 Long economicalId = resultSet.getLong("economical_id");
-                LegalPersonCustomer legalPerson = new LegalPersonCustomer(customerID,name,registrationDate,economicalId);
+                LegalPersonCustomer legalPerson = new LegalPersonCustomer(customerID, name, registrationDate, economicalId);
                 legalPersons.add(legalPerson);
             }
         } catch (SQLException e) {
@@ -77,25 +78,31 @@ public class LegalPersonDAO {
         return legalPersons;
     }
 
-    public static Boolean delete(LegalPersonCustomer legalPerson){
+    public static Boolean delete(LegalPersonCustomer legalPerson) {
         Connection connection = Database.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM legal_persons WHERE customer_id=?");
             statement.setInt(1, legalPerson.getCustomerID());
-            statement.executeUpdate();
+            Integer affectedRows = statement.executeUpdate();
+            Boolean result = true;
+            if (affectedRows == 0)
+                result = false;
 
             statement = connection.prepareStatement("DELETE FROM customers WHERE customer_id=?");
             statement.setInt(1, legalPerson.getCustomerID());
-            statement.executeUpdate();
+            affectedRows = statement.executeUpdate();
+            if (affectedRows == 0)
+                result = false;
             connection.close();
-            return true;
+            return result;
 
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
-    public static Boolean edit(LegalPersonCustomer legalPerson){
+
+    public static Boolean edit(LegalPersonCustomer legalPerson) {
         Connection connection = Database.getConnection();
         String queryString = "";
         Boolean first = true;
@@ -115,8 +122,10 @@ public class LegalPersonDAO {
         try {
             PreparedStatement statement = connection.prepareStatement("UPDATE legal_persons SET" + queryString + " WHERE customer_id = ?");
             statement.setInt(1, legalPerson.getCustomerID());
-            statement.executeUpdate();
+            Integer affectedRows = statement.executeUpdate();
             connection.close();
+            if (affectedRows == 0)
+                return false;
             return true;
 
         } catch (SQLException e) {

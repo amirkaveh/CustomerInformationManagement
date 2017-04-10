@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 /**
  * Created by $Hamid on 3/13/2017.
  */
-@WebServlet("/deleteNaturalCustomer")
+@WebServlet("/deleteNaturalPerson")
 public class NaturalPersonDelete extends HttpServlet {
 
     private ServletContext context;

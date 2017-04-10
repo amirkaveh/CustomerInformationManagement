@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 /**
  * Created by $Hamid on 3/13/2017.
  */
-@WebServlet("/editLegalCustomer")
+@WebServlet("/editLegalPerson")
 public class LegalPersonEdit extends HttpServlet {
 
 //    private ServletContext context;
@@ -43,14 +43,8 @@ public class LegalPersonEdit extends HttpServlet {
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request,response);
 
-        String customerIDString = request.getParameter("customerID");
-        Integer customerID = null;
-        try {
-            customerID = Integer.parseInt(customerIDString);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+        Integer customerID = RequestParser.getInteger(request,"customerID");//may produce exception. it's ok.
+
         LegalPersonCustomer legalPerson = new LegalPersonCustomer();
         legalPerson.setCustomerID(customerID);
         if(LegalPersonAddNew.getParametersAndValidate(request,legalPerson) && LegalPersonDAO.edit(legalPerson)) {
@@ -72,14 +66,8 @@ public class LegalPersonEdit extends HttpServlet {
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request,response);
 
-        String customerIDString = request.getParameter("customerID");
-        Integer customerID = null;
-        try {
-            customerID = Integer.parseInt(customerIDString);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+        Integer customerID = RequestParser.getInteger(request,"customerID");//may produce exception. it's ok.
+
         LegalPersonCustomer searchPerson = new LegalPersonCustomer();
         searchPerson.setCustomerID(customerID);
         LegalPersonCustomer legalPerson = LegalPersonDAO.search(searchPerson).get(0);

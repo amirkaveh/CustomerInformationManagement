@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by $Hamid on 3/13/2017.
  */
-@WebServlet("/searchLegalCustomer")
+@WebServlet("/searchLegalPerson")
 public class LegalPersonSearch extends HttpServlet {
 
 //    private ServletContext context;
@@ -30,8 +30,6 @@ public class LegalPersonSearch extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        context.log("post method");
 
-//        TODO: may make code more modular and maintainable!
-
         PrintWriter out = response.getWriter();
         request.setAttribute("pageTitle", "Search Legal Customer");
         request.getRequestDispatcher("header.jsp").include(request, response);
@@ -44,7 +42,6 @@ public class LegalPersonSearch extends HttpServlet {
         List<LegalPersonCustomer> legalPersons = LegalPersonDAO.search(legalPerson);
         request.setAttribute("legalPersons", legalPersons);
         request.getRequestDispatcher("legal-search-result-table.jsp").include(request,response);
-
 
         request.getRequestDispatcher("footer.html").include(request, response);
         out.println("</body>");
@@ -71,20 +68,18 @@ public class LegalPersonSearch extends HttpServlet {
 
     private void getParameters(HttpServletRequest request, LegalPersonCustomer legalPerson) {
 //        context.log("getParameters");
-        String name = request.getParameter("name");
-        String economicalIDString = request.getParameter("economicalID");
-        Long economicalID = null;
+        String name = RequestParser.getString(request, "name");
+        Long economicalID;
         try {
-            economicalID = Long.parseLong(economicalIDString);
+            economicalID = RequestParser.getLong(request,"economicalID");
         } catch (Exception e) {
-            //e.printStackTrace();
+            economicalID = null;
         }
-        String customerIDString = request.getParameter("customerID");
-        Integer customerID = null;
+        Integer customerID;
         try {
-            customerID = Integer.parseInt(customerIDString);
+            customerID = RequestParser.getInteger(request,"customerID");
         } catch (Exception e) {
-            //e.printStackTrace();
+            customerID = null;
         }
 
         if (name != null && !name.equals(""))

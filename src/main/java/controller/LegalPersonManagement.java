@@ -12,7 +12,7 @@ import java.io.PrintWriter;
  * Created by $Hamid on 3/13/2017.
  */
 
-@WebServlet("/legalCustomerManagement")
+@WebServlet("/legalPersonManagement")
 public class LegalPersonManagement extends HttpServlet {
 
     @Override

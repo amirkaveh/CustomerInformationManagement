@@ -25,7 +25,7 @@
                 <td><c:out value="${legalPerson.getFatherName()}"/></td>
                 <td><c:out value="${legalPerson.getBirthDate()}"/></td>
                 <td>
-                    <form action="editNaturalCustomer" method="get">
+                    <form action="editNaturalPerson" method="get">
                         <input type="hidden" name="customerID" value="<c:out value="${legalPerson.getCustomerID()}"/>">
                         <button type="submit" class="btn btn-warning">
                             <i class="glyphicon glyphicon-edit"></i>
@@ -33,7 +33,7 @@
                     </form>
                 </td>
                 <td>
-                    <form action="deleteNaturalCustomer" method="get">
+                    <form action="deleteNaturalPerson" method="get">
                         <input type="hidden" name="customerID" value="<c:out value="${legalPerson.getCustomerID()}"/>">
                         <button type="submit" class="btn btn-danger">
                             <i class="glyphicon glyphicon-remove"></i>

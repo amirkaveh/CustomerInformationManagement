@@ -19,10 +19,10 @@ import java.util.Date;
 /**
  * Created by $Hamid on 3/13/2017.
  */
-@WebServlet("/addNewNaturalCustomer")
+@WebServlet("/addNewNaturalPerson")
 public class NaturalPersonAddNew extends HttpServlet {
 
-    private ServletContext context;
+//    private ServletContext context;
 
     @Override
     public void init() throws ServletException {

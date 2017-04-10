@@ -19,10 +19,10 @@ import java.util.Date;
 /**
  * Created by $Hamid on 3/13/2017.
  */
-@WebServlet("/addNewLegalCustomer")
+@WebServlet("/addNewLegalPerson")
 public class LegalPersonAddNew extends HttpServlet {
 
-    private ServletContext context;
+//    private ServletContext context;
 
     @Override
     public void init() throws ServletException {
@@ -33,8 +33,6 @@ public class LegalPersonAddNew extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        context.log("post method");
-
-//        TODO: may make code more modular and maintainable!
 
         PrintWriter out = response.getWriter();
         request.setAttribute("pageTitle", "Add Legal Customer");
@@ -93,29 +91,24 @@ public class LegalPersonAddNew extends HttpServlet {
 
     public static Boolean getParametersAndValidate(HttpServletRequest request, LegalPersonCustomer legalPerson) {
         //context.log("validation");
-        String name = request.getParameter("name");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String registrationDateString = request.getParameter("registration");
-        Date registraionDate = null;
+        String name = RequestParser.getString(request,"name");
+        Date registrationDate;
         try {
-            registraionDate = dateFormat.parse(registrationDateString);
+            registrationDate = RequestParser.getDate(request,"registration");
         } catch (Exception e) {
-//            e.printStackTrace();
             return false;
         }
-        String economicalIDString = request.getParameter("economicalID");
-        Long economicalID = null;
+        Long economicalID;
         try {
-            economicalID = Long.parseLong(economicalIDString);
+            economicalID = RequestParser.getLong(request,"economicalID");
         } catch (Exception e) {
-//            e.printStackTrace();
             return false;
         }
-        if (name == null || name.equals("") || registraionDate == null || economicalID == null)
+        if (name == null || name.equals("") || registrationDate == null || economicalID == null)
             return false;
 
         legalPerson.setName(name);
-        legalPerson.setRegistrationDate(registraionDate);
+        legalPerson.setRegistrationDate(registrationDate);
         legalPerson.setEconomicalID(economicalID);
 
         return true;
