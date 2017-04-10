@@ -10,6 +10,16 @@ public class LegalPersonCustomer extends Customer {
     private Date registrationDate;
     private Long economicalID;
 
+    public LegalPersonCustomer() {
+    }
+
+    public LegalPersonCustomer(Integer customerID, String name, Date registrationDate, Long economicalID) {
+        this.name = name;
+        this.registrationDate = registrationDate;
+        this.economicalID = economicalID;
+        this.setCustomerID(customerID);
+    }
+
     public String getName() {
         return name;
     }

@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="margin-top-30"
+         align="left">
+        <h2>Search among legal person customers</h2>
+        <p class="font-size-medium"> Fill in the form based on the information of the legal person who you are looking
+            for.</p>
+        <form class="form-horizontal" action="searchLegalCustomer" method="POST">
+            <div class="row col-md-6 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="name">Company name:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter company name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="economicalID">Economical ID:</label>
+                    <div class="col-sm-7">
+                        <input type="number" class="form-control" name="economicalID" id="economicalID"
+                               placeholder="Enter economical ID">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-6 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="customerID">Customer ID:</label>
+                    <div class="col-sm-7">
+                        <input type="number" class="form-control" name="customerID" id="customerID"
+                               placeholder="Enter customer ID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!--<div class="col-sm-12">-->
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-info col-sm-offset-4 col-sm-7 col-xs-12">
+                                <i class="glyphicon glyphicon-search"></i>
+                                Search
+                            </button>
+                        </div>
+                    <!--</div>-->
+                </div>
+            </div>
+
+
+
+        </form>
+    </div>
+</div>

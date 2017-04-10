@@ -6,26 +6,22 @@
         <thead>
         <tr>
             <th>Customer ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>National ID</th>
-            <th>Father Name</th>
-            <th>Birth Date</th>
+            <th>Company Name</th>
+            <th>Economical ID</th>
+            <th>Registration Date</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${naturalPersons}" var="legalPerson">
+        <c:forEach items="${legalPersons}" var="legalPerson">
             <tr>
                 <td><c:out value="${legalPerson.getCustomerID()}"/></td>
                 <td><c:out value="${legalPerson.getName()}"/></td>
-                <td><c:out value="${legalPerson.getFamily()}"/></td>
-                <td><c:out value="${legalPerson.getNationalID()}"/></td>
-                <td><c:out value="${legalPerson.getFatherName()}"/></td>
-                <td><c:out value="${legalPerson.getBirthDate()}"/></td>
+                <td><c:out value="${legalPerson.getEconomicalID()}"/></td>
+                <td><c:out value="${legalPerson.getRegistrationDate()}"/></td>
                 <td>
-                    <form action="editNaturalCustomer" method="get">
+                    <form action="editLegalCustomer" method="get">
                         <input type="hidden" name="customerID" value="<c:out value="${legalPerson.getCustomerID()}"/>">
                         <button type="submit" class="btn btn-warning">
                             <i class="glyphicon glyphicon-edit"></i>
@@ -33,7 +29,7 @@
                     </form>
                 </td>
                 <td>
-                    <form action="deleteNaturalCustomer" method="get">
+                    <form action="deleteLegalCustomer" method="get">
                         <input type="hidden" name="customerID" value="<c:out value="${legalPerson.getCustomerID()}"/>">
                         <button type="submit" class="btn btn-danger">
                             <i class="glyphicon glyphicon-remove"></i>

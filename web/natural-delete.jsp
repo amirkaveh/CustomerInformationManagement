@@ -43,15 +43,15 @@
             </div>
 
 
-            <div class="form-group col-xs-4 ">
+            <div class="form-group col-xs-12 col-sm-4 ">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <button type="submit" name="delete" value="Delete Button" class="btn btn-danger col-md-12">
+                    <div class="col-sm-6 col-xs-12">
+                        <button type="submit" name="delete" value="Delete Button" class="btn btn-danger col-xs-12">
                             Delete
                         </button>
                     </div>
-                    <div class="col-sm-6">
-                        <button type="submit" name="cancel" value="Cancel Button" class="btn btn-success col-md-12">
+                    <div class="col-sm-6 col-xs-12">
+                        <button type="submit" name="cancel" value="Cancel Button" class="btn btn-success col-xs-12">
                             Cancel
                         </button>
                     </div>

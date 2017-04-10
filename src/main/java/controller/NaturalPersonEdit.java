@@ -56,7 +56,7 @@ public class NaturalPersonEdit extends HttpServlet {
         NaturalPersonCustomer naturalPerson = new NaturalPersonCustomer();
         naturalPerson.setCustomerID(customerID);
         if(NaturalPersonAddNew.getParametersAndValidate(request,naturalPerson) && NaturalPersonDAO.edit(naturalPerson)) {
-            request.getRequestDispatcher("natural-edited.html").include(request, response);
+            request.getRequestDispatcher("customer-edited.html").include(request, response);
         }
         else request.getRequestDispatcher("error.html").include(request,response);
 

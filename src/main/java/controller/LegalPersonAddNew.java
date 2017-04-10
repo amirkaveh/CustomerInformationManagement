@@ -1,7 +1,7 @@
 package controller;
 
 import dao.CustomerDAO;
-import dao.LegalCustomerDAO;
+import dao.LegalPersonDAO;
 import model.Customer;
 import model.LegalPersonCustomer;
 
@@ -20,7 +20,7 @@ import java.util.Date;
  * Created by $Hamid on 3/13/2017.
  */
 @WebServlet("/addNewLegalCustomer")
-public class LegalCustomerAddNew extends HttpServlet {
+public class LegalPersonAddNew extends HttpServlet {
 
     private ServletContext context;
 
@@ -59,7 +59,7 @@ public class LegalCustomerAddNew extends HttpServlet {
                 request.getRequestDispatcher("alert-error.jsp").include(request, response);
             } else {
                 legalPerson.setCustomerID(customer.getCustomerID());
-                if (LegalCustomerDAO.insert(legalPerson)) {
+                if (LegalPersonDAO.insert(legalPerson)) {
                     request.setAttribute("customerID", customer.getCustomerID());
                     request.getRequestDispatcher("alert-success.jsp").include(request, response);
                 } else {
@@ -91,7 +91,7 @@ public class LegalCustomerAddNew extends HttpServlet {
         out.close();
     }
 
-    private Boolean getParametersAndValidate(HttpServletRequest request, LegalPersonCustomer legalPerson) {
+    public static Boolean getParametersAndValidate(HttpServletRequest request, LegalPersonCustomer legalPerson) {
         //context.log("validation");
         String name = request.getParameter("name");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

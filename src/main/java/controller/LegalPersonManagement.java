@@ -13,8 +13,7 @@ import java.io.PrintWriter;
  */
 
 @WebServlet("/legalCustomerManagement")
-public class LegalCustomerManagement extends HttpServlet {
-
+public class LegalPersonManagement extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
