@@ -5,7 +5,6 @@ import dao.LegalPersonDAO;
 import model.Customer;
 import model.LegalPersonCustomer;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -104,7 +102,7 @@ public class LegalPersonAddNew extends HttpServlet {
         } catch (Exception e) {
             return false;
         }
-        if (name == null || name.equals("") || registrationDate == null || economicalID == null)
+        if (name == null || name.equals(""))
             return false;
 
         legalPerson.setName(name);

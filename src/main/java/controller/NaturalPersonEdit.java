@@ -3,7 +3,6 @@ package controller;
 import dao.NaturalPersonDAO;
 import model.NaturalPersonCustomer;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,17 +17,17 @@ import java.io.PrintWriter;
 @WebServlet("/editNaturalPerson")
 public class NaturalPersonEdit extends HttpServlet {
 
-    private ServletContext context;
+//    private ServletContext context;
 
     @Override
     public void init() throws ServletException {
-        context = getServletContext();
+//        context = getServletContext();
     }
 
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        context.log("Edit: doPost");
+//        context.log("Edit: doPost");
 
         if(request.getParameter("cancel")!=null)
             request.getRequestDispatcher("/").forward(request,response);
@@ -45,14 +44,8 @@ public class NaturalPersonEdit extends HttpServlet {
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request,response);
 
-        String customerIDString = request.getParameter("customerID");
-        Integer customerID = null;
-        try {
-            customerID = Integer.parseInt(customerIDString);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+        Integer customerID = RequestParser.getInteger(request,"customerID");//may produce exception. it's ok.
+
         NaturalPersonCustomer naturalPerson = new NaturalPersonCustomer();
         naturalPerson.setCustomerID(customerID);
         if(NaturalPersonAddNew.getParametersAndValidate(request,naturalPerson) && NaturalPersonDAO.edit(naturalPerson)) {
@@ -68,22 +61,15 @@ public class NaturalPersonEdit extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        context.log("Edit: doGet");
+//        context.log("Edit: doGet");
         PrintWriter out = response.getWriter();
         request.setAttribute("pageTitle","Edit Natural Customer");
         request.getRequestDispatcher("header.jsp").include(request,response);
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request,response);
 
-        String customerIDString = request.getParameter("customerID");
-        Integer customerID = null;
-        try {
-            customerID = Integer.parseInt(customerIDString);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
-//        context.log("customerID: "+ customerID);
+        Integer customerID = RequestParser.getInteger(request,"customerID");//may produce exception. it's ok.
+
         NaturalPersonCustomer searchPerson = new NaturalPersonCustomer();
         searchPerson.setCustomerID(customerID);
         NaturalPersonCustomer naturalPerson = NaturalPersonDAO.search(searchPerson).get(0);

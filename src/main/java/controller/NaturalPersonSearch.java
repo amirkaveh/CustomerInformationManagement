@@ -30,8 +30,6 @@ public class NaturalPersonSearch extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        context.log("post method");
 
-//        TODO: may make code more modular and maintainable!
-
         PrintWriter out = response.getWriter();
         request.setAttribute("pageTitle", "Search Natural Customer");
         request.getRequestDispatcher("header.jsp").include(request, response);
@@ -45,7 +43,6 @@ public class NaturalPersonSearch extends HttpServlet {
         request.setAttribute("naturalPersons", naturalPersons);
         request.getRequestDispatcher("natural-search-result-table.jsp").include(request,response);
 
-
         request.getRequestDispatcher("footer.html").include(request, response);
         out.println("</body>");
         out.close();
@@ -55,7 +52,7 @@ public class NaturalPersonSearch extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        //context.log("get method");
+//        context.log("get method");
         PrintWriter out = response.getWriter();
         request.setAttribute("pageTitle", "Search Natural Customer");
         request.getRequestDispatcher("header.jsp").include(request, response);
@@ -71,21 +68,19 @@ public class NaturalPersonSearch extends HttpServlet {
 
     private void getParameters(HttpServletRequest request, NaturalPersonCustomer naturalPerson) {
 //        context.log("getParameters");
-        String name = request.getParameter("name");
-        String family = request.getParameter("family");
-        String nationalIDString = request.getParameter("nationalID");
-        Long nationalID = null;
+        String name = RequestParser.getString(request,"name");
+        String family = RequestParser.getString(request,"family");
+        Long nationalID;
         try {
-            nationalID = Long.parseLong(nationalIDString);
+            nationalID = RequestParser.getLong(request,"nationalID");
         } catch (Exception e) {
-            //e.printStackTrace();
+            nationalID = null;
         }
-        String customerIDString = request.getParameter("customerID");
-        Integer customerID = null;
+        Integer customerID;
         try {
-            customerID = Integer.parseInt(customerIDString);
+            customerID = RequestParser.getInteger(request,"customerID");
         } catch (Exception e) {
-            //e.printStackTrace();
+            customerID = null;
         }
 
         if (name != null && !name.equals(""))

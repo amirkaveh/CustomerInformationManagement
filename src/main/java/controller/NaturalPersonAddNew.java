@@ -5,7 +5,6 @@ import dao.NaturalPersonDAO;
 import model.Customer;
 import model.NaturalPersonCustomer;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -33,8 +31,6 @@ public class NaturalPersonAddNew extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        context.log("post method");
-
-//        TODO: may make code more modular and maintainable!
 
         PrintWriter out = response.getWriter();
         request.setAttribute("pageTitle","Add Natural Customer");
@@ -94,29 +90,24 @@ public class NaturalPersonAddNew extends HttpServlet {
 
     public static Boolean getParametersAndValidate(HttpServletRequest request, NaturalPersonCustomer naturalPerson) {
         //context.log("validation");
-        String name = request.getParameter("name");
-        String family = request.getParameter("family");
-        String fatherName = request.getParameter("father");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String birthDateString = request.getParameter("birth");
-        Date birthDate=null;
+        String name = RequestParser.getString(request,"name");
+        String family = RequestParser.getString(request,"family");
+        String fatherName = RequestParser.getString(request, "father");
+        Date birthDate;
         try {
-            birthDate = dateFormat.parse(birthDateString);
+            birthDate = RequestParser.getDate(request,"birth");
         } catch (Exception e) {
-//            e.printStackTrace();
             return false;
         }
-        String nationalIDString = request.getParameter("nationalID");
-        Long nationalID=null;
+        Long nationalID;
         try {
-            nationalID = Long.parseLong(nationalIDString);
+            nationalID = RequestParser.getLong(request,"nationalID");
         } catch (Exception e) {
-//            e.printStackTrace();
             return false;
         }
-        if( name==null || name.equals("") || family==null || family.equals("") || fatherName==null || fatherName.equals("")
-                || birthDate==null || nationalID==null )
+        if( name==null || name.equals("") || family==null || family.equals("") || fatherName==null || fatherName.equals(""))
             return false;
+
         naturalPerson.setName(name);
         naturalPerson.setFamily(family);
         naturalPerson.setFatherName(fatherName);
