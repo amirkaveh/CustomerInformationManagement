@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="validate-national-id.js"></script>
 <div class="container">
     <div class="margin-top-30" align="left">
         <h2> Edit natural person customer</h2>
         <p class="font-size-medium"> Edit any part of the information you want to change, left others as they are:</p>
-        <form class="form-horizontal" action="editNaturalPerson" method="POST">
+        <form class="form-horizontal" name="naturalPersonForm" action="editNaturalPerson" method="POST" onsubmit="return validateNationalID()">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="customerID">Customer ID:</label>
                 <div class="col-sm-3">
@@ -14,31 +15,36 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Name:</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" required name="name" id="name" placeholder="Enter name" value="<c:out value="${naturalPerson.getName()}"/>">
+                    <input type="text" class="form-control" required name="name" id="name" placeholder="Enter name"
+                           value="<c:out value="${naturalPerson.getName()}"/>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="family">Family:</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" required name="family" id="family" placeholder="Enter family" value="<c:out value="${naturalPerson.getFamily()}"/>">
+                    <input type="text" class="form-control" required name="family" id="family"
+                           placeholder="Enter family" value="<c:out value="${naturalPerson.getFamily()}"/>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="father">Father name:</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" required name="father" id="father" placeholder="Enter father name" value="<c:out value="${naturalPerson.getFatherName()}"/>">
+                    <input type="text" class="form-control" required name="father" id="father"
+                           placeholder="Enter father name" value="<c:out value="${naturalPerson.getFatherName()}"/>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="birth">Birth date:</label>
                 <div class="col-sm-3">
-                    <input type="date" class="form-control" required name="birth" id="birth" placeholder="Enter birth date" value="<c:out value="${naturalPerson.getBirthDate()}"/>">
+                    <input type="date" class="form-control" required name="birth" id="birth"
+                           placeholder="Enter birth date" value="<c:out value="${naturalPerson.getBirthDate()}"/>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="nationalID">National ID:</label>
                 <div class="col-sm-3">
-                    <input type="number" class="form-control" required name="nationalID" id="nationalID" placeholder="Enter national ID" value="<c:out value="${naturalPerson.getNationalID()}"/>">
+                    <input type="number" class="form-control" required name="nationalID" id="nationalID"
+                           placeholder="Enter national ID" value="<c:out value="${naturalPerson.getNationalID()}"/>">
                 </div>
             </div>
 

@@ -1,8 +1,10 @@
+<script src="validate-national-id.js"></script>
 <div class="container">
-    <div class="margin-top-30 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1" align="left">
+    <div class="margin-top-30 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1"
+         align="left">
         <h2>Add new natural person customer</h2>
         <p class="font-size-medium"> Fill in the form information of new customer</p>
-        <form class="form-horizontal" action="addNewNaturalPerson" method="POST">
+        <form class="form-horizontal" name="naturalPersonForm" action="addNewNaturalPerson" method="POST" onsubmit="return validateNationalID()">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Name:</label>
                 <div class="col-sm-7">
@@ -12,31 +14,35 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="family">Family:</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" required name="family" id="family" placeholder="Enter family">
+                    <input type="text" class="form-control" required name="family" id="family"
+                           placeholder="Enter family">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="father">Father name:</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" required name="father" id="father" placeholder="Enter father name">
+                    <input type="text" class="form-control" required name="father" id="father"
+                           placeholder="Enter father name">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="birth">Birth date:</label>
                 <div class="col-sm-7">
-                    <input type="date" class="form-control" required name="birth" id="birth" placeholder="Enter birth date">
+                    <input type="date" class="form-control" required name="birth" id="birth"
+                           placeholder="Enter birth date">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="nationalID">National ID:</label>
                 <div class="col-sm-7">
-                    <input type="number" class="form-control" required name="nationalID" id="nationalID" placeholder="Enter national ID">
+                    <input type="number" class="form-control" required name="nationalID" id="nationalID"
+                           placeholder="Enter national ID">
                 </div>
             </div>
 
 
             <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-5">
+                <div class="col-sm-offset-2 col-sm-5">
                     <button type="submit" class="btn btn-success">Add Customer</button>
                 </div>
             </div>

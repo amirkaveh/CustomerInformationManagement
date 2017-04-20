@@ -31,7 +31,6 @@ public class Customer {
         return customerID;
     }
 
-//    TODO: get use of boolean return value in used cases if necessary
     public Boolean setCustomerID(Integer customerID) {
         if (this.customerID == null) {
             this.customerID = customerID;

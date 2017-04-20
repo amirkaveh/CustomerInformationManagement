@@ -12,8 +12,6 @@ public class NaturalPersonCustomer extends Customer{
     private Date birthDate;
     private Long nationalID;
 
-//    TODO: may use constructor instead of these bunch of setter method
-
     public NaturalPersonCustomer() {
     }
 
