@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="margin-top-30 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1" align="left">
+        <h2>Add new Loan Type</h2>
+        <p class="font-size-medium"> Fill in the form information of new customer</p>
+        <form class="form-horizontal" action="addGrantsToLoanType" method="GET">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="name">Loan type name:</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" required name="name" id="name" placeholder="Enter loan type name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="interestRate">Interest rate:</label>
+                <div class="col-sm-7">
+                    <input type="number" step="0.01" class="form-control" required name="interestRate" id="interestRate" placeholder="Enter interest rate">
+                </div>
+            </div>
+
+            <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-5">
+                    <button type="submit" class="btn btn-warning">Add Loan Type</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

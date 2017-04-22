@@ -14,6 +14,10 @@ public class RequestParser {
         String resultString = request.getParameter(parameter);
         return Integer.parseInt(resultString);
     }
+    public static Double getDouble(HttpServletRequest request, String parameter) {
+        String resultString = request.getParameter(parameter);
+        return Double.parseDouble(resultString);
+    }
 
     public static Long getLong(HttpServletRequest request, String parameter) {
         String resultString = request.getParameter(parameter);
