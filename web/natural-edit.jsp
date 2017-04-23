@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="validate-national-id.js"></script>
+<script src="functions.js"></script>
 <div class="container">
     <div class="margin-top-30" align="left">
         <h2> Edit natural person customer</h2>

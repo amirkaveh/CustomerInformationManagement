@@ -29,7 +29,7 @@ public class LoanTypeAddGrant extends HttpServlet {
 
         String loanTypeName = RequestParser.getString(request,"name");
         Double interestRate = RequestParser.getDouble(request,"interestRate");
-        request.setAttribute("name",loanTypeName);
+        request.setAttribute("loanTypeName",loanTypeName);
         request.setAttribute("interestRate",interestRate);
         request.getRequestDispatcher("loan-type-add-grants.jsp").include(request, response);
 
