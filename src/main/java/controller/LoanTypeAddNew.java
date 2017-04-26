@@ -32,32 +32,32 @@ public class LoanTypeAddNew extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        context.log("LoanType: doPost");
-        PrintWriter out = response.getWriter();
-        request.setAttribute("pageTitle", "Add Loan Type");
-        request.getRequestDispatcher("header.jsp").include(request, response);
-        out.println("<body>");
-        request.getRequestDispatcher("nav.html").include(request, response);
-
-        Session session = Database.openSession();
-        Transaction transaction = null;
-        try{
-            transaction = session.beginTransaction();
-            List grantConditions = session.createQuery("FROM GrantCondition").list();
-            for (Object grantConditionObject : grantConditions) {
-                GrantCondition grantCondition = (GrantCondition) grantConditionObject;
-                out.println("<h1>" + grantCondition.getName() + "</h1>");
-            }
-            transaction.commit();
-        }catch (HibernateException e) {
-            if (transaction!=null) transaction.rollback();
-        }finally {
-            session.close();
-        }
-
-        request.getRequestDispatcher("footer.html").include(request, response);
-        out.println("</body>");
-        out.close();
+////        context.log("LoanType: doPost");
+//        PrintWriter out = response.getWriter();
+//        request.setAttribute("pageTitle", "Add Loan Type");
+//        request.getRequestDispatcher("header.jsp").include(request, response);
+//        out.println("<body>");
+//        request.getRequestDispatcher("nav.html").include(request, response);
+//
+//        Session session = Database.openSession();
+//        Transaction transaction = null;
+//        try{
+//            transaction = session.beginTransaction();
+//            List grantConditions = session.createQuery("FROM GrantCondition").list();
+//            for (Object grantConditionObject : grantConditions) {
+//                GrantCondition grantCondition = (GrantCondition) grantConditionObject;
+//                out.println("<h1>" + grantCondition.getName() + "</h1>");
+//            }
+//            transaction.commit();
+//        }catch (HibernateException e) {
+//            if (transaction!=null) transaction.rollback();
+//        }finally {
+//            session.close();
+//        }
+//
+//        request.getRequestDispatcher("footer.html").include(request, response);
+//        out.println("</body>");
+//        out.close();
     }
 
     @Override

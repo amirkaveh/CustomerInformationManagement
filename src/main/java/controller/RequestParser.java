@@ -1,9 +1,13 @@
 package controller;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by $Hamid on 4/10/2017.
@@ -13,6 +17,12 @@ public class RequestParser {
     public static Integer getInteger(HttpServletRequest request, String parameter) {
         String resultString = request.getParameter(parameter);
         return Integer.parseInt(resultString);
+    }
+    public static List<Integer> getIntegerList(HttpServletRequest request, String parameter) {
+        String resultStringArray[] = request.getParameterValues(parameter);
+        List<Integer> resultList = new ArrayList<>();
+        for (String string: resultStringArray) resultList.add(Integer.parseInt(string));
+        return resultList;
     }
     public static Double getDouble(HttpServletRequest request, String parameter) {
         String resultString = request.getParameter(parameter);
@@ -32,6 +42,20 @@ public class RequestParser {
 
     public static String getString(HttpServletRequest request, String parameter){
         return request.getParameter(parameter);
+    }
+
+    public static List<String> getStringList(HttpServletRequest request, String parameter){
+        String stringArray[] = request.getParameterValues(parameter);
+        List<String> resultList = new ArrayList<>();
+        for(String string: stringArray) resultList.add(string);
+        return resultList;
+    }
+
+    public static List<BigDecimal> getBigDecimalList(HttpServletRequest request, String parameter) {
+        String stringArray[] = request.getParameterValues(parameter);
+        List<BigDecimal> resultList = new ArrayList<>();
+        for(String string: stringArray) resultList.add(new BigDecimal(string));
+        return resultList;
     }
 
 }

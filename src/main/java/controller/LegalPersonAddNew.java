@@ -57,7 +57,7 @@ public class LegalPersonAddNew extends HttpServlet {
                 legalPerson.setCustomerID(customer.getCustomerID());
                 if (LegalPersonDAO.insert(legalPerson)) {
                     request.setAttribute("customerID", customer.getCustomerID());
-                    request.getRequestDispatcher("alert-success.jsp").include(request, response);
+                    request.getRequestDispatcher("customer-added.jsp").include(request, response);
                 } else {
                     CustomerDAO.delete(customer);
                     request.setAttribute("errorTitle", "Database Error:");

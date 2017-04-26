@@ -55,19 +55,19 @@ function addRow() {
     if(!checkGrantRequiredFields())
         return;
     var nameDiv = document.createElement('td');
-    nameDiv.innerHTML = document.getElementById('name').value + '<input type="hidden" name="grantConditionList[][name]" value="' + document.getElementById('name').value + '"/>';
+    nameDiv.innerHTML = document.getElementById('name').value + '<input type="hidden" name="grantConditionNames[]" value="' + document.getElementById('name').value + '"/>';
     document.getElementById('name').value = "";
     var minDurationDiv = document.createElement('td');
-    minDurationDiv.innerHTML = document.getElementById('minContractDuration').value + '<input type="hidden" name="grantConditionList[][minContractDuration]" value="' + document.getElementById('minContractDuration').value + '"/>';
+    minDurationDiv.innerHTML = document.getElementById('minContractDuration').value + '<input type="hidden" name="minContractDurations[]" value="' + document.getElementById('minContractDuration').value + '"/>';
     document.getElementById('minContractDuration').value = "";
     var maxDurationDiv = document.createElement('td');
-    maxDurationDiv.innerHTML = document.getElementById('maxContractDuration').value + '<input type="hidden" name="grantConditionList[][maxContractDuration]" value="' + document.getElementById('maxContractDuration').value + '"/>';
+    maxDurationDiv.innerHTML = document.getElementById('maxContractDuration').value + '<input type="hidden" name="maxContractDurations[]" value="' + document.getElementById('maxContractDuration').value + '"/>';
     document.getElementById('maxContractDuration').value = "";
     var minAmountDiv = document.createElement('td');
-    minAmountDiv.innerHTML = document.getElementById('minContractAmount').value + '<input type="hidden" name="grantConditionList[][minContractAmount]" value="' + document.getElementById('minContractAmount').value + '"/>';
+    minAmountDiv.innerHTML = document.getElementById('minContractAmount').value + '<input type="hidden" name="minContractAmounts[]" value="' + document.getElementById('minContractAmount').value + '"/>';
     document.getElementById('minContractAmount').value = "";
     var maxAmountDiv = document.createElement('td');
-    maxAmountDiv.innerHTML = document.getElementById('maxContractAmount').value + '<input type="hidden" name="grantConditionList[][maxContractAmount]" value="' + document.getElementById('maxContractAmount').value + '"/>';
+    maxAmountDiv.innerHTML = document.getElementById('maxContractAmount').value + '<input type="hidden" name="maxContractAmounts[]" value="' + document.getElementById('maxContractAmount').value + '"/>';
     document.getElementById('maxContractAmount').value = "";
     var deleteDiv = document.createElement('div');
     deleteDiv.innerHTML = '<button type="submit" class="btn btn-danger" onclick="removeRow(this)">\

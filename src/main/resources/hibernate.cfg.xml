@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.dialect">
-            org.hibernate.dialect.MySQLDialect
+            org.hibernate.dialect.MySQL5Dialect
         </property>
         <property name="hibernate.connection.driver_class">
             com.mysql.jdbc.Driver
@@ -21,10 +21,12 @@
         <property name="hibernate.connection.password">
             root
         </property>
+        <property name="hbm2ddl.auto">update</property>
 
         <!-- List of XML mapping files -->
         <!--<mapping resource="Employee.hbm.xml"/>-->
         <mapping class="model.GrantCondition"/>
+        <mapping class="model.LoanType"/>
 
     </session-factory>
 </hibernate-configuration>
