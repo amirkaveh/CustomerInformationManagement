@@ -11,9 +11,9 @@ import java.io.PrintWriter;
 /**
  * Created by $Hamid on 3/13/2017.
  */
+@WebServlet("/naturalPersonManagement")
+public class NaturalPersonManagementServlet extends HttpServlet {
 
-@WebServlet("/legalPersonManagement")
-public class LegalPersonManagement extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
@@ -22,19 +22,17 @@ public class LegalPersonManagement extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        request.setAttribute("pageTitle","Legal Customer Management");
+        request.setAttribute("pageTitle","Natural Customer Management");
         request.getRequestDispatcher("header.jsp").include(request,response);
         out.println("<body>");
         request.getRequestDispatcher("nav.html").include(request,response);
-        request.getRequestDispatcher("legal.html").include(request,response);
+        request.getRequestDispatcher("natural.html").include(request,response);
         request.getRequestDispatcher("footer.html").include(request,response);
         out.println("</body>");
-        out.close();
-    }
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doPost(request, response);
-    }
+        out.close();    }
 }
 

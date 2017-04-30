@@ -1,10 +1,9 @@
-package dao;
+package crud;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import javax.servlet.ServletContext;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,7 +11,7 @@ import java.sql.SQLException;
 /**
  * Created by $Hamid on 3/29/2017.
  */
-public class Database {
+public class DatabaseUtils {
 
     private static SessionFactory SESSION_FACTORY;
 

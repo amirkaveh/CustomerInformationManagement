@@ -5,15 +5,15 @@ import java.util.Date;
 /**
  * Created by $Hamid on 3/12/2017.
  */
-public class LegalPersonCustomer extends Customer {
+public class LegalPersonCustomerModel extends CustomerModel {
     private String name;
     private Date registrationDate;
     private Long economicalID;
 
-    public LegalPersonCustomer() {
+    public LegalPersonCustomerModel() {
     }
 
-    public LegalPersonCustomer(Integer customerID, String name, Date registrationDate, Long economicalID) {
+    public LegalPersonCustomerModel(Integer customerID, String name, Date registrationDate, Long economicalID) {
         this.name = name;
         this.registrationDate = registrationDate;
         this.economicalID = economicalID;

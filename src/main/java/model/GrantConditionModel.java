@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="grant_conditions")
-public class GrantCondition {
+public class GrantConditionModel {
     @SequenceGenerator(name = "grant_condition_id_generator", sequenceName = "seq2", allocationSize = 1)
     @Id @GeneratedValue(generator = "grant_condition_id_generator")
     @Column(name="grant_condition_id")
@@ -26,11 +26,11 @@ public class GrantCondition {
 
     @ManyToOne
     @JoinColumn(name = "loan_type_id",referencedColumnName = "loan_type_id")
-    private LoanType loanType;
+    private LoanTypeModel loanTypeModel;
 
-    public GrantCondition(){}
+    public GrantConditionModel(){}
 
-    public GrantCondition(String name, Integer minContractDuration, Integer maxContractDuration, BigDecimal minContractAmount, BigDecimal maxContractAmount) {
+    public GrantConditionModel(String name, Integer minContractDuration, Integer maxContractDuration, BigDecimal minContractAmount, BigDecimal maxContractAmount) {
         this.name = name;
         this.minContractDuration = minContractDuration;
         this.maxContractDuration = maxContractDuration;
@@ -38,12 +38,12 @@ public class GrantCondition {
         this.maxContractAmount = maxContractAmount;
     }
 
-    public LoanType getLoanType() {
-        return loanType;
+    public LoanTypeModel getLoanTypeModel() {
+        return loanTypeModel;
     }
 
-    public void setLoanType(LoanType loanType) {
-        this.loanType = loanType;
+    public void setLoanTypeModel(LoanTypeModel loanTypeModel) {
+        this.loanTypeModel = loanTypeModel;
     }
 
     public int getId() {

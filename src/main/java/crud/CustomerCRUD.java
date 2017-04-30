@@ -1,20 +1,18 @@
-package dao;
+package crud;
 
-import model.Customer;
+import exception.DatabaseQueryException;
+import model.CustomerModel;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by $Hamid on 3/29/2017.
  */
-public class CustomerDAO {
-    public static Boolean insert(Customer customer){
-        Connection connection=Database.getConnection();
+public class CustomerCRUD {
+    public static void insert(CustomerModel customer) throws DatabaseQueryException {
+        Connection connection= DatabaseUtils.getConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("insert into customers(customer_type) VALUES (?)");
+            PreparedStatement statement = connection.prepareStatement("insert into customers(customer_type) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, customer.getType().toString());
             statement.executeUpdate();
 
@@ -23,18 +21,15 @@ public class CustomerDAO {
             customer.setCustomerID(generatedKeys.getInt(1));
 
             connection.close();
-            return true;
-
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new DatabaseQueryException(e);
         }
     }
-    public static Boolean delete(Customer customer){
-        Connection connection=Database.getConnection();
+    public static Boolean delete(CustomerModel customerModel){
+        Connection connection= DatabaseUtils.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("delete from customers where customer_id=?");
-            statement.setInt(1,customer.getCustomerID());
+            statement.setInt(1, customerModel.getCustomerID());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {

@@ -1,7 +1,5 @@
 package model;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "loan_types")
-public class LoanType {
+public class LoanTypeModel {
     @SequenceGenerator(name = "loan_type_id_generator" , sequenceName = "seq1", allocationSize = 1)
     @Id @GeneratedValue(generator = "loan_type_id_generator")
     @Column(name = "loan_type_id")
@@ -23,16 +21,16 @@ public class LoanType {
     @Column(name = "interest_rate")
     private Double interestRate;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "loanType", orphanRemoval = true)
-    private Set<GrantCondition> grantConditions = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "loanTypeModel", orphanRemoval = true)
+    private Set<GrantConditionModel> grantConditionModels = new HashSet<>();
 
-    public LoanType() {}
+    public LoanTypeModel() {}
 
-    public LoanType(String name, Double interestRate, Set<GrantCondition> grantConditions) {
+    public LoanTypeModel(String name, Double interestRate, Set<GrantConditionModel> grantConditionModels) {
         this.name = name;
         this.interestRate = interestRate;
-        this.grantConditions = grantConditions;
-        referGrantConditionsToThisLoanType(this.grantConditions);
+        this.grantConditionModels = grantConditionModels;
+        referGrantConditionsToThisLoanType(this.grantConditionModels);
     }
 
     public Integer getId() {
@@ -59,18 +57,18 @@ public class LoanType {
         this.interestRate = interestRate;
     }
 
-    public Set<GrantCondition> getGrantConditions() {
-        return grantConditions;
+    public Set<GrantConditionModel> getGrantConditionModels() {
+        return grantConditionModels;
     }
 
-    public void setGrantConditions(Set<GrantCondition> grantConditions) {
-        this.grantConditions = grantConditions;
-        referGrantConditionsToThisLoanType(this.grantConditions);
+    public void setGrantConditionModels(Set<GrantConditionModel> grantConditionModels) {
+        this.grantConditionModels = grantConditionModels;
+        referGrantConditionsToThisLoanType(this.grantConditionModels);
     }
 
-    private void referGrantConditionsToThisLoanType(Set<GrantCondition> grantConditionSet){
-        for (GrantCondition grantCondition: grantConditionSet){
-            grantCondition.setLoanType(this);
+    private void referGrantConditionsToThisLoanType(Set<GrantConditionModel> grantConditionModelSet){
+        for (GrantConditionModel grantConditionModel : grantConditionModelSet){
+            grantConditionModel.setLoanTypeModel(this);
         }
     }
 }

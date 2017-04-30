@@ -1,19 +1,17 @@
-package dao;
+package crud;
 
-import model.NaturalPersonCustomer;
+import exception.DatabaseQueryException;
+import model.NaturalPersonCustomerModel;
 
-import javax.servlet.ServletContext;
-import javax.xml.crypto.Data;
 import java.sql.*;
-import java.sql.Date;
 import java.util.*;
 
 /**
  * Created by $Hamid on 4/8/2017.
  */
-public class NaturalPersonDAO {
-    public static boolean insert(NaturalPersonCustomer naturalPerson) {
-        Connection connection = Database.getConnection();
+public class NaturalPersonCRUD {
+    public static void insert(NaturalPersonCustomerModel naturalPerson) throws DatabaseQueryException {
+        Connection connection = DatabaseUtils.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("insert into natural_persons(customer_id,person_name,person_family,father_name,birth_date,national_id) VALUES (?,?,?,?,?,?)");
             statement.setInt(1, naturalPerson.getCustomerID());
@@ -26,35 +24,36 @@ public class NaturalPersonDAO {
             statement.executeUpdate();
 
             connection.close();
-            return true;
 
         } catch (SQLException e) {
-            //e.printStackTrace();
-            return false;
+            throw new DatabaseQueryException(e);
         }
     }
 
-    public static Boolean delete(NaturalPersonCustomer naturalPerson){
-        Connection connection = Database.getConnection();
+    public static void delete(Integer customerID) throws DatabaseQueryException {
+        Connection connection = DatabaseUtils.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM natural_persons WHERE customer_id=?");
-            statement.setInt(1, naturalPerson.getCustomerID());
-            statement.executeUpdate();
+            statement.setInt(1, customerID);
+            Integer affectedRows = statement.executeUpdate();
 
             statement = connection.prepareStatement("DELETE FROM customers WHERE customer_id=?");
-            statement.setInt(1, naturalPerson.getCustomerID());
-            statement.executeUpdate();
+            statement.setInt(1, customerID);
+            affectedRows += statement.executeUpdate();
+
             connection.close();
-            return true;
+
+            if (affectedRows < 2) {
+                throw new DatabaseQueryException("customerID is not present in either or both tables. Sum of affected rows is: " + affectedRows);
+            }
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new DatabaseQueryException(e);
         }
     }
 
-    public static Boolean edit(NaturalPersonCustomer naturalPerson){
-        Connection connection = Database.getConnection();
+    public static void update(NaturalPersonCustomerModel naturalPerson) throws DatabaseQueryException {
+        Connection connection = DatabaseUtils.getConnection();
         String queryString = "";
         Boolean first = true;
         if (naturalPerson.getName() != null) {
@@ -83,16 +82,14 @@ public class NaturalPersonDAO {
             statement.setInt(1, naturalPerson.getCustomerID());
             statement.executeUpdate();
             connection.close();
-            return true;
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new DatabaseQueryException(e);
         }
     }
 
-    public static List<NaturalPersonCustomer> search(NaturalPersonCustomer naturalPerson) {
-        Connection connection = Database.getConnection();
+    public static List<NaturalPersonCustomerModel> search(NaturalPersonCustomerModel naturalPerson) throws DatabaseQueryException {
+        Connection connection = DatabaseUtils.getConnection();
 
         String selectQuery = "SELECT * FROM natural_persons";
         Boolean first = true;
@@ -118,27 +115,25 @@ public class NaturalPersonDAO {
             ResultSet resultSet = statement.executeQuery(selectQuery);
             return makeNaturalPersonList(resultSet);
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            throw new DatabaseQueryException(e);
         }
 
     }
-    private static List<NaturalPersonCustomer> makeNaturalPersonList(ResultSet resultSet) {
-        List<NaturalPersonCustomer> naturalPersons = new ArrayList<>();
-        try {
-            while (resultSet.next()) {
-                Integer customerID = resultSet.getInt("customer_id");
-                String name = resultSet.getString("person_name");
-                String family = resultSet.getString("person_family");
-                String father = resultSet.getString("father_name");
-                java.util.Date birthDate = resultSet.getDate("birth_date");
-                Long nationalID = resultSet.getLong("national_id");
-                NaturalPersonCustomer naturalPerson = new NaturalPersonCustomer(customerID,name,family,father,birthDate,nationalID);
-                naturalPersons.add(naturalPerson);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+    private static List<NaturalPersonCustomerModel> makeNaturalPersonList(ResultSet resultSet) throws SQLException {
+        List<NaturalPersonCustomerModel> naturalPersons = new ArrayList<>();
+
+        while (resultSet.next()) {
+            Integer customerID = resultSet.getInt("customer_id");
+            String name = resultSet.getString("person_name");
+            String family = resultSet.getString("person_family");
+            String father = resultSet.getString("father_name");
+            java.util.Date birthDate = resultSet.getDate("birth_date");
+            Long nationalID = resultSet.getLong("national_id");
+            NaturalPersonCustomerModel naturalPerson = new NaturalPersonCustomerModel(customerID, name, family, father, birthDate, nationalID);
+            naturalPersons.add(naturalPerson);
         }
+
         return naturalPersons;
     }
 }

@@ -5,17 +5,17 @@ import java.util.Date;
 /**
  * Created by $Hamid on 3/12/2017.
  */
-public class NaturalPersonCustomer extends Customer{
+public class NaturalPersonCustomerModel extends CustomerModel {
     private String name;
     private String family;
     private String fatherName;
     private Date birthDate;
     private Long nationalID;
 
-    public NaturalPersonCustomer() {
+    public NaturalPersonCustomerModel() {
     }
 
-    public NaturalPersonCustomer(Integer customerID, String name, String family, String fatherName, Date birthDate, Long nationalID) {
+    public NaturalPersonCustomerModel(Integer customerID, String name, String family, String fatherName, Date birthDate, Long nationalID) {
         this.name = name;
         this.family = family;
         this.fatherName = fatherName;

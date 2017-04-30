@@ -1,8 +1,7 @@
-package dao;
+package crud;
 
-import model.LegalPersonCustomer;
-import model.LegalPersonCustomer;
-import model.LegalPersonCustomer;
+import exception.DatabaseQueryException;
+import model.LegalPersonCustomerModel;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,9 +10,9 @@ import java.util.List;
 /**
  * Created by $Hamid on 4/8/2017.
  */
-public class LegalPersonDAO {
-    public static boolean insert(LegalPersonCustomer legalPerson) {
-        Connection connection = Database.getConnection();
+public class LegalPersonCRUD {
+    public static void insert(LegalPersonCustomerModel legalPerson) throws DatabaseQueryException {
+        Connection connection = DatabaseUtils.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("insert into legal_persons(customer_id,company_name,registration_date,economical_id) VALUES (?,?,?,?)");
             statement.setInt(1, legalPerson.getCustomerID());
@@ -24,16 +23,13 @@ public class LegalPersonDAO {
             statement.executeUpdate();
 
             connection.close();
-            return true;
-
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new DatabaseQueryException(e);
         }
     }
 
-    public static List<LegalPersonCustomer> search(LegalPersonCustomer legalPerson) {
-        Connection connection = Database.getConnection();
+    public static List<LegalPersonCustomerModel> search(LegalPersonCustomerModel legalPerson) throws DatabaseQueryException {
+        Connection connection = DatabaseUtils.getConnection();
 
         String selectQuery = "SELECT * FROM legal_persons";
         Boolean first = true;
@@ -55,55 +51,49 @@ public class LegalPersonDAO {
             ResultSet resultSet = statement.executeQuery(selectQuery);
             return makeLegalPersonList(resultSet);
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            throw new DatabaseQueryException(e);
         }
 
     }
 
-    private static List<LegalPersonCustomer> makeLegalPersonList(ResultSet resultSet) {
-        List<LegalPersonCustomer> legalPersons = new ArrayList<>();
-        try {
-            while (resultSet.next()) {
-                Integer customerID = resultSet.getInt("customer_id");
-                String name = resultSet.getString("company_name");
-                java.util.Date registrationDate = resultSet.getDate("registration_date");
-                Long economicalId = resultSet.getLong("economical_id");
-                LegalPersonCustomer legalPerson = new LegalPersonCustomer(customerID, name, registrationDate, economicalId);
-                legalPersons.add(legalPerson);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    private static List<LegalPersonCustomerModel> makeLegalPersonList(ResultSet resultSet) throws SQLException {
+        List<LegalPersonCustomerModel> legalPersons = new ArrayList<>();
+        while (resultSet.next()) {
+            Integer customerID = resultSet.getInt("customer_id");
+            String name = resultSet.getString("company_name");
+            java.util.Date registrationDate = resultSet.getDate("registration_date");
+            Long economicalId = resultSet.getLong("economical_id");
+            LegalPersonCustomerModel legalPerson = new LegalPersonCustomerModel(customerID, name, registrationDate, economicalId);
+            legalPersons.add(legalPerson);
         }
+
         return legalPersons;
     }
 
-    public static Boolean delete(LegalPersonCustomer legalPerson) {
-        Connection connection = Database.getConnection();
+    public static void delete(Integer customerID) throws DatabaseQueryException {
+        Connection connection = DatabaseUtils.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM legal_persons WHERE customer_id=?");
-            statement.setInt(1, legalPerson.getCustomerID());
+            statement.setInt(1, customerID);
             Integer affectedRows = statement.executeUpdate();
-            Boolean result = true;
-            if (affectedRows == 0)
-                result = false;
 
             statement = connection.prepareStatement("DELETE FROM customers WHERE customer_id=?");
-            statement.setInt(1, legalPerson.getCustomerID());
-            affectedRows = statement.executeUpdate();
-            if (affectedRows == 0)
-                result = false;
+            statement.setInt(1, customerID);
+            affectedRows += statement.executeUpdate();
+
             connection.close();
-            return result;
+
+            if (affectedRows < 2) {
+                throw new DatabaseQueryException("customerID is not present in either or both tables. Sum of affected rows is: " + affectedRows);
+            }
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new DatabaseQueryException(e);
         }
     }
 
-    public static Boolean edit(LegalPersonCustomer legalPerson) {
-        Connection connection = Database.getConnection();
+    public static void update(LegalPersonCustomerModel legalPerson) throws DatabaseQueryException {
+        Connection connection = DatabaseUtils.getConnection();
         String queryString = "";
         Boolean first = true;
         if (legalPerson.getName() != null) {
@@ -124,13 +114,12 @@ public class LegalPersonDAO {
             statement.setInt(1, legalPerson.getCustomerID());
             Integer affectedRows = statement.executeUpdate();
             connection.close();
-            if (affectedRows == 0)
-                return false;
-            return true;
+            if (affectedRows == 0) {
+                throw new DatabaseQueryException("No row affected!");
+            }
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new DatabaseQueryException(e);
         }
     }
 }

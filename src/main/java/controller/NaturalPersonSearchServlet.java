@@ -1,7 +1,9 @@
 package controller;
 
-import dao.NaturalPersonDAO;
-import model.NaturalPersonCustomer;
+import crud.NaturalPersonCRUD;
+import exception.DatabaseQueryException;
+import logic.NaturalPersonLogic;
+import model.NaturalPersonCustomerModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +18,7 @@ import java.util.List;
  * Created by $Hamid on 3/13/2017.
  */
 @WebServlet("/searchNaturalPerson")
-public class NaturalPersonSearch extends HttpServlet {
+public class NaturalPersonSearchServlet extends HttpServlet {
 
 //    private ServletContext context;
 
@@ -37,11 +39,16 @@ public class NaturalPersonSearch extends HttpServlet {
         request.getRequestDispatcher("nav.html").include(request, response);
         request.getRequestDispatcher("natural-search-form.html").include(request, response);
 
-        NaturalPersonCustomer naturalPerson = new NaturalPersonCustomer();
-        getParameters(request, naturalPerson);
-        List<NaturalPersonCustomer> naturalPersons = NaturalPersonDAO.search(naturalPerson);
-        request.setAttribute("naturalPersons", naturalPersons);
-        request.getRequestDispatcher("natural-search-result-table.jsp").include(request,response);
+        NaturalPersonCustomerModel naturalPerson = RequestParserUtils.makeNaturalPersonFromRequestParameters(request);
+        try {
+            List<NaturalPersonCustomerModel> naturalPersons = NaturalPersonLogic.searchPerson(naturalPerson);
+            request.setAttribute("naturalPersons", naturalPersons);
+            request.getRequestDispatcher("natural-search-result-table.jsp").include(request, response);
+        }catch (DatabaseQueryException e){
+            request.setAttribute("errorTitle", "Database Error");
+            request.setAttribute("info", e.toString());
+            request.getRequestDispatcher("error.jsp").include(request,response);
+        }
 
         request.getRequestDispatcher("footer.html").include(request, response);
         out.println("</body>");
@@ -65,32 +72,5 @@ public class NaturalPersonSearch extends HttpServlet {
     }
 
 
-
-    private void getParameters(HttpServletRequest request, NaturalPersonCustomer naturalPerson) {
-//        context.log("getParameters");
-        String name = RequestParser.getString(request,"name");
-        String family = RequestParser.getString(request,"family");
-        Long nationalID;
-        try {
-            nationalID = RequestParser.getLong(request,"nationalID");
-        } catch (Exception e) {
-            nationalID = null;
-        }
-        Integer customerID;
-        try {
-            customerID = RequestParser.getInteger(request,"customerID");
-        } catch (Exception e) {
-            customerID = null;
-        }
-
-        if (name != null && !name.equals(""))
-            naturalPerson.setName(name);
-        if (family != null && !family.equals(""))
-            naturalPerson.setFamily(family);
-        if (nationalID != null)
-            naturalPerson.setNationalID(nationalID);
-        if (customerID != null)
-            naturalPerson.setCustomerID(customerID);
-    }
 }
 

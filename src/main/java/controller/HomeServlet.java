@@ -12,29 +12,28 @@ import java.io.PrintWriter;
  * Created by $Hamid on 3/13/2017.
  */
 @WebServlet("")
-public class Home extends HttpServlet {
+public class HomeServlet extends HttpServlet {
 
 
     @Override
     public void init() throws ServletException {
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        request.setAttribute("pageTitle","Customer Information Management");
-        request.getRequestDispatcher("header.jsp").include(request,response);
+        request.setAttribute("pageTitle", "Customer Information Management");
+        request.getRequestDispatcher("header.jsp").include(request, response);
         out.println("<body>");
-        request.getRequestDispatcher("nav.html").include(request,response);
-        request.getRequestDispatcher("home.html").include(request,response);
-        request.getRequestDispatcher("footer.html").include(request,response);
+        request.getRequestDispatcher("nav.html").include(request, response);
+        request.getRequestDispatcher("home.html").include(request, response);
+        request.getRequestDispatcher("footer.html").include(request, response);
         out.println("</body>");
         out.close();
-    }
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doPost(request, response);
     }
 }
 
