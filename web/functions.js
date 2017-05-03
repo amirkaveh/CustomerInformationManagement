@@ -4,6 +4,10 @@
 
 function validateNationalID() {
     var nationalID = document.forms["naturalPersonForm"]["nationalID"].value;
+    if (nationalID.length != 10) {
+        alert("National ID must be 10 digits.");
+        return false;
+    }
     nationalID = Number(nationalID);
     var rightDigit = nationalID % 10;
     nationalID = Math.floor(nationalID / 10);
@@ -21,30 +25,30 @@ function validateNationalID() {
         sum = 11 - sum;
     }
     if (rightDigit != sum) {
-        alert("NationalID is not valid. Check it again!");
+        alert("National ID is not valid. Check it again!");
         return false;
     }
     return true;
 }
 
 function checkGrantRequiredFields() {
-    if (document.getElementById('name').value=="") {
+    if (document.getElementById('name').value == "") {
         alert("Name field can't be empty!")
         return false;
     }
-    if (document.getElementById('minContractDuration').value=="") {
+    if (document.getElementById('minContractDuration').value == "") {
         alert("Minimum Duration field can't be empty!")
         return false;
     }
-    if (document.getElementById('maxContractDuration').value=="") {
+    if (document.getElementById('maxContractDuration').value == "") {
         alert("Maximum Duration field can't be empty!")
         return false;
     }
-    if (document.getElementById('minContractAmount').value=="") {
+    if (document.getElementById('minContractAmount').value == "") {
         alert("Minimum Amount field can't be empty!")
         return false;
     }
-    if (document.getElementById('maxContractAmount').value=="") {
+    if (document.getElementById('maxContractAmount').value == "") {
         alert("Maximum Amount field can't be empty!")
         return false;
     }
@@ -52,7 +56,7 @@ function checkGrantRequiredFields() {
 }
 
 function addRow() {
-    if(!checkGrantRequiredFields())
+    if (!checkGrantRequiredFields())
         return;
     var nameDiv = document.createElement('td');
     nameDiv.innerHTML = document.getElementById('name').value + '<input type="hidden" name="grantConditionNames[]" value="' + document.getElementById('name').value + '"/>';

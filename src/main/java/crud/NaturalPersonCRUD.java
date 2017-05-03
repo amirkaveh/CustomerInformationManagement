@@ -2,6 +2,7 @@ package crud;
 
 import exception.DatabaseQueryException;
 import model.NaturalPersonCustomerModel;
+import utils.DatabaseUtils;
 
 import java.sql.*;
 import java.util.*;
@@ -23,10 +24,10 @@ public class NaturalPersonCRUD {
             statement.setLong(6, naturalPerson.getNationalID());
             statement.executeUpdate();
 
-            connection.close();
-
         } catch (SQLException e) {
             throw new DatabaseQueryException(e);
+        } finally {
+            DatabaseUtils.closeConnection(connection);
         }
     }
 
@@ -41,14 +42,14 @@ public class NaturalPersonCRUD {
             statement.setInt(1, customerID);
             affectedRows += statement.executeUpdate();
 
-            connection.close();
-
             if (affectedRows < 2) {
                 throw new DatabaseQueryException("customerID is not present in either or both tables. Sum of affected rows is: " + affectedRows);
             }
 
         } catch (SQLException e) {
             throw new DatabaseQueryException(e);
+        } finally {
+            DatabaseUtils.closeConnection(connection);
         }
     }
 
@@ -81,10 +82,11 @@ public class NaturalPersonCRUD {
             PreparedStatement statement = connection.prepareStatement("UPDATE natural_persons SET" + queryString + " WHERE customer_id = ?");
             statement.setInt(1, naturalPerson.getCustomerID());
             statement.executeUpdate();
-            connection.close();
 
         } catch (SQLException e) {
             throw new DatabaseQueryException(e);
+        } finally {
+            DatabaseUtils.closeConnection(connection);
         }
     }
 
@@ -116,6 +118,8 @@ public class NaturalPersonCRUD {
             return makeNaturalPersonList(resultSet);
         } catch (SQLException e) {
             throw new DatabaseQueryException(e);
+        } finally {
+            DatabaseUtils.closeConnection(connection);
         }
 
     }

@@ -1,9 +1,9 @@
 package controller;
 
-import crud.NaturalPersonCRUD;
 import exception.DatabaseQueryException;
 import logic.NaturalPersonLogic;
 import model.NaturalPersonCustomerModel;
+import utils.RequestParserUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

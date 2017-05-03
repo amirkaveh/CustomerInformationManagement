@@ -4,6 +4,7 @@ import exception.DatabaseQueryException;
 import exception.InputDataException;
 import logic.LegalPersonLogic;
 import model.LegalPersonCustomerModel;
+import utils.RequestParserUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

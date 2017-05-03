@@ -1,9 +1,9 @@
 package controller;
 
-import crud.LegalPersonCRUD;
 import exception.DatabaseQueryException;
 import logic.LegalPersonLogic;
 import model.LegalPersonCustomerModel;
+import utils.RequestParserUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

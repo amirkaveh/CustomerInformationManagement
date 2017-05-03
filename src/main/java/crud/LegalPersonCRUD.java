@@ -2,6 +2,8 @@ package crud;
 
 import exception.DatabaseQueryException;
 import model.LegalPersonCustomerModel;
+import org.apache.bcel.generic.DUP;
+import utils.DatabaseUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,10 +23,10 @@ public class LegalPersonCRUD {
             statement.setDate(3, new java.sql.Date(legalPerson.getRegistrationDate().getTime()));
             statement.setLong(4, legalPerson.getEconomicalID());
             statement.executeUpdate();
-
-            connection.close();
         } catch (SQLException e) {
             throw new DatabaseQueryException(e);
+        } finally {
+            DatabaseUtils.closeConnection(connection);
         }
     }
 
@@ -52,6 +54,8 @@ public class LegalPersonCRUD {
             return makeLegalPersonList(resultSet);
         } catch (SQLException e) {
             throw new DatabaseQueryException(e);
+        } finally {
+            DatabaseUtils.closeConnection(connection);
         }
 
     }
@@ -81,14 +85,14 @@ public class LegalPersonCRUD {
             statement.setInt(1, customerID);
             affectedRows += statement.executeUpdate();
 
-            connection.close();
-
             if (affectedRows < 2) {
                 throw new DatabaseQueryException("customerID is not present in either or both tables. Sum of affected rows is: " + affectedRows);
             }
 
         } catch (SQLException e) {
             throw new DatabaseQueryException(e);
+        } finally {
+            DatabaseUtils.closeConnection(connection);
         }
     }
 
@@ -113,13 +117,15 @@ public class LegalPersonCRUD {
             PreparedStatement statement = connection.prepareStatement("UPDATE legal_persons SET" + queryString + " WHERE customer_id = ?");
             statement.setInt(1, legalPerson.getCustomerID());
             Integer affectedRows = statement.executeUpdate();
-            connection.close();
+
             if (affectedRows == 0) {
                 throw new DatabaseQueryException("No row affected!");
             }
 
         } catch (SQLException e) {
             throw new DatabaseQueryException(e);
+        } finally {
+            DatabaseUtils.closeConnection(connection);
         }
     }
 }

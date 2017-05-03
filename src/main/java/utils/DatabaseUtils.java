@@ -1,4 +1,4 @@
-package crud;
+package utils;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,4 +38,19 @@ public class DatabaseUtils {
         return SESSION_FACTORY.openSession();
     }
 
+    public static void closeConnection(Connection connection) {
+        try {
+            connection.close();
+        } catch (Exception e) {
+            /*ignored*/
+        }
+    }
+
+    public static void closeSession(Session session){
+        try {
+            session.close();
+        } catch (Exception e){
+            /*ignored*/
+        }
+    }
 }

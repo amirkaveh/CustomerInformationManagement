@@ -2,6 +2,7 @@ package crud;
 
 import exception.DatabaseQueryException;
 import model.CustomerModel;
+import utils.DatabaseUtils;
 
 import java.sql.*;
 
@@ -20,9 +21,10 @@ public class CustomerCRUD {
             generatedKeys.next();
             customer.setCustomerID(generatedKeys.getInt(1));
 
-            connection.close();
         } catch (SQLException e) {
             throw new DatabaseQueryException(e);
+        }finally {
+            DatabaseUtils.closeConnection(connection);
         }
     }
     public static Boolean delete(CustomerModel customerModel){
@@ -33,8 +35,9 @@ public class CustomerCRUD {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
+        } finally {
+            DatabaseUtils.closeConnection(connection);
         }
 
     }

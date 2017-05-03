@@ -33,6 +33,7 @@
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.3.0.Final" />
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.0.1" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:6.0.6" />
+          <element id="library" level="project" name="Maven: org.webjars:jquery:3.2.0" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="CustomerInformationManagement/web/Web" />

@@ -4,6 +4,7 @@ import exception.DatabaseQueryException;
 import exception.InputDataException;
 import logic.NaturalPersonLogic;
 import model.NaturalPersonCustomerModel;
+import utils.RequestParserUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.Date;
 
 /**
  * Created by $Hamid on 3/13/2017.

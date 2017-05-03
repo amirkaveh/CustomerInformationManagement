@@ -1,9 +1,8 @@
-package controller;
+package utils;
 
 import model.LegalPersonCustomerModel;
 import model.NaturalPersonCustomerModel;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -37,6 +36,11 @@ public class RequestParserUtils {
     public static Long getLong(HttpServletRequest request, String parameter) {
         String resultString = request.getParameter(parameter);
         return Long.parseLong(resultString);
+    }
+
+    public static BigDecimal getBigDecimal(HttpServletRequest request, String parameter) {
+        String resultString = request.getParameter(parameter);
+        return new BigDecimal(resultString);
     }
 
     public static Date getDate(HttpServletRequest request, String parameter) throws ParseException {

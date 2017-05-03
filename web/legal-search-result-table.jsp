@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="container">
     <h2>Search Results</h2>
     <p>Search result based on your input parameters are listed here:</p>

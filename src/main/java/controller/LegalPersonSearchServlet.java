@@ -1,16 +1,15 @@
 package controller;
 
-import crud.LegalPersonCRUD;
 import exception.DatabaseQueryException;
 import logic.LegalPersonLogic;
 import model.LegalPersonCustomerModel;
+import utils.RequestParserUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
