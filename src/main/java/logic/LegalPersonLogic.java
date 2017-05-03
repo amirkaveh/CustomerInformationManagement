@@ -16,7 +16,7 @@ public class LegalPersonLogic {
     static public void addPerson(LegalPersonCustomerModel legalPerson) throws InputDataException, DatabaseQueryException {
         validateInput(legalPerson);
         CustomerModel customer = new CustomerModel();
-        customer.setType(CustomerModel.CustomerType.legalPerson);
+//        customer.setType(CustomerModel.CustomerType.legalPerson);
         CustomerCRUD.insert(customer);
         legalPerson.setCustomerID(customer.getCustomerID());
         try {

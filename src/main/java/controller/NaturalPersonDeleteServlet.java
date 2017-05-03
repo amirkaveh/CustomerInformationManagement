@@ -30,7 +30,7 @@ public class NaturalPersonDeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("cancel") != null)
-            request.getRequestDispatcher("/").forward(request, response);
+            response.sendRedirect("/");
         if (request.getParameter("delete") != null) {
             onDelete(request, response);
         }

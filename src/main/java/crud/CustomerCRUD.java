@@ -11,10 +11,11 @@ import java.sql.*;
  */
 public class CustomerCRUD {
     public static void insert(CustomerModel customer) throws DatabaseQueryException {
-        Connection connection= DatabaseUtils.getConnection();
+        Connection connection = DatabaseUtils.getConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("insert into customers(customer_type) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, customer.getType().toString());
+//            PreparedStatement statement = connection.prepareStatement("insert into customers(customer_type) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+//            statement.setString(1, customer.getType().toString());
+            PreparedStatement statement = connection.prepareStatement("insert into customers() VALUES ()", Statement.RETURN_GENERATED_KEYS);
             statement.executeUpdate();
 
             ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -23,12 +24,13 @@ public class CustomerCRUD {
 
         } catch (SQLException e) {
             throw new DatabaseQueryException(e);
-        }finally {
+        } finally {
             DatabaseUtils.closeConnection(connection);
         }
     }
-    public static Boolean delete(CustomerModel customerModel){
-        Connection connection= DatabaseUtils.getConnection();
+
+    public static Boolean delete(CustomerModel customerModel) {
+        Connection connection = DatabaseUtils.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("delete from customers where customer_id=?");
             statement.setInt(1, customerModel.getCustomerID());

@@ -32,7 +32,7 @@ public class LegalPersonEditServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("cancel") != null)
-            request.getRequestDispatcher("/").forward(request, response);
+            response.sendRedirect("/");
         if (request.getParameter("ok") != null) {
             onEdit(request, response);
         }

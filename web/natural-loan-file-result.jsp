@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="margin-top-30" align="left">
-        <h2> Customer Loan Saving result </h2>
+        <h2> Customer Loan Saving Result </h2>
         <p > Result: <span id="result"> <c:out value="${result}"/> </span> </p>
         <p > Info: <span class="font-size-medium"> <c:out value="${info}"/> </span> </p>
     </div>

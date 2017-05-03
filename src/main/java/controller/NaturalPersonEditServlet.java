@@ -34,7 +34,7 @@ public class NaturalPersonEditServlet extends HttpServlet {
 //        context.log("Edit: doPost");
 
         if(request.getParameter("cancel")!=null)
-            request.getRequestDispatcher("/").forward(request,response);
+            response.sendRedirect("/");
         if(request.getParameter("ok")!=null)
         {
             onEdit(request,response);

@@ -18,7 +18,7 @@ public class NaturalPersonLogic {
     static public void addPerson(NaturalPersonCustomerModel naturalPerson) throws InputDataException, DatabaseQueryException {
         validateInput(naturalPerson);
         CustomerModel customer = new CustomerModel();
-        customer.setType(CustomerModel.CustomerType.naturalPerson);
+//        customer.setType(CustomerModel.CustomerType.naturalPerson);
         CustomerCRUD.insert(customer);
         naturalPerson.setCustomerID(customer.getCustomerID());
         try {

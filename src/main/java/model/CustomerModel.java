@@ -6,27 +6,28 @@ package model;
 public class CustomerModel {
 
     private Integer customerID;
-    //TODO: delete this redundant variable from class and database
-    private CustomerType type;
 
-    public enum CustomerType {
-        naturalPerson("natural-person"),
-        legalPerson("legal-person");
-        private String value;
+    //DONE: delete this redundant variable from class and database
+//    private CustomerType type;
 
-        CustomerType(String value) {
-            this.value = value;
-        }
-
-        private String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return this.getValue();
-        }
-    }
+//    public enum CustomerType {
+//        naturalPerson("natural-person"),
+//        legalPerson("legal-person");
+//        private String value;
+//
+//        CustomerType(String value) {
+//            this.value = value;
+//        }
+//
+//        private String getValue() {
+//            return value;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return this.getValue();
+//        }
+//    }
 
     public Integer getCustomerID() {
         return customerID;
@@ -40,11 +41,4 @@ public class CustomerModel {
         return false;
     }
 
-    public CustomerType getType() {
-        return type;
-    }
-
-    public void setType(CustomerType type) {
-        this.type = type;
-    }
 }
